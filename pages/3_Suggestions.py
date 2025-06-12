@@ -5,6 +5,11 @@ from sklearn.metrics.pairwise import cosine_similarity
 from difflib import get_close_matches
 import difflib
 from pathlib import Path
+
+import logging
+logging.basicConfig(filename='app.log', level=logging.INFO)
+logging.info('Ceci est un message de log.')
+
 # Titre principal
 st.markdown(
     "<h1 style='text-align: center;font-size: 60px'>👀<em> On mate quoi ?</h1></em>",
