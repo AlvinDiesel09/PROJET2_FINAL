@@ -4,11 +4,12 @@ import numpy as np
 import plotly.express as px
 import matplotlib.pyplot as plt
 import base64
+from pathlib import Path
 
 st.set_page_config(page_title="Projet 2", layout="wide")
-
+dir = Path.cwd()
 with st.sidebar:
-    st.image("pictures/Logo Team Rocket.png", width=170)
+    st.image(dir/"pictures"/"Logo Team Rocket.png", width=170)
 
 st.markdown(
     "<h1 style='text-align: center; font-size: 60px;'>🎞️     <em>PROJET 2 </h1></em>",
@@ -21,7 +22,7 @@ st.write("\n")
 
 
 # Chemin vers la vidéo
-video_path = "pictures\Design sans titre.mp4"
+video_path = dir/"pictures"/"Design sans titre.mp4"
 
 # Lecture et encodage en base64
 with open(video_path, "rb") as f:

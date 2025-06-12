@@ -4,16 +4,16 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from difflib import get_close_matches
 import difflib
-
+from pathlib import Path
 # Titre principal
 st.markdown(
     "<h1 style='text-align: center;font-size: 60px'>👀<em> On mate quoi ?</h1></em>",
     unsafe_allow_html=True,
 )
-
+dir = Path.cwd()
 # Chargement des données
-main_df = pd.read_parquet("data/main_df.parquet")
-people_df = pd.read_parquet("data/people_df.parquet")
+main_df = pd.read_parquet(dir/"data"/"main_df.parquet")
+people_df = pd.read_parquet(dir/"data"/"people_df.parquet")
 
 # Préparation des images
 BASE_POSTER_URL = "https://image.tmdb.org/t/p/w300"

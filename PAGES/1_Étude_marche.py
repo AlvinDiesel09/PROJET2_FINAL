@@ -1,11 +1,12 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
-
+from pathlib import Path
 st.set_page_config(page_title="Étude de Marché", layout="wide")
 
+dir = Path.cwd()
 with st.sidebar:
-    st.image("pictures/Logo Team Rocket.png", width=170)
+    st.image(dir/"pictures"/"Logo Team Rocket.png", width=170)
 
 st.write(
     "<h1 style='text-align: center; font-size: 60px;'>🔍<em> Étude de Marché</h1></em>",

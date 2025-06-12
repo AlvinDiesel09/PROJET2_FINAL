@@ -3,6 +3,7 @@ import pandas as pd
 import plotly.express as px
 import matplotlib.pyplot as plt
 from datetime import datetime
+from pathlib import Path
 
 # 📈 Configuration de la page
 st.set_page_config(
@@ -10,8 +11,9 @@ st.set_page_config(
 )
 
 
+dir = Path.cwd()
 with st.sidebar:
-    st.image("pictures/Logo Team Rocket.png", width=170)
+    st.image(dir/"pictures"/"Logo Team Rocket.png", width=170)
 st.write(
     "<h1 style='text-align: center; font-size: 60px;'>🎬<em> Dashboard d'Analyse Cinématographique</h1></em>",
     unsafe_allow_html=True,
@@ -21,8 +23,8 @@ st.write("\n")
 st.write("\n")
 st.write("\n")
 st.write("\n")
-main_df = pd.read_parquet("data\main_df.parquet")
-people_df = pd.read_parquet("data\people_df.parquet")
+main_df = pd.read_parquet(dir/"data"/"main_df.parquet")
+people_df = pd.read_parquet(dir/"data"/"people_df.parquet")
 
 main_df["startYear"] = (main_df["startYear"]).astype(int)
 
