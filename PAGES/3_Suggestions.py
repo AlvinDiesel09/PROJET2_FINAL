@@ -109,7 +109,7 @@ if film_input:
         st.markdown("<hr style='border:1px solid gray'>", unsafe_allow_html=True)
 
 with st.sidebar:
-    st.image("pictures/Logo Team Rocket.png", width=170)
+    st.image(dir/"pictures"/"Logo Team Rocket.png", width=170)
 
 # Favoris
 with st.sidebar:
