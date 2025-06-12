@@ -42,6 +42,7 @@ with st.sidebar:
 
 ###################  indicateur 1 ###################
 def most_present_genres(df):
+    df = df.copy()
     df["genre"] = df["genres"].str.split(",").copy()
     exploded = df.explode("genre")
     genre_counts = exploded["genre"].value_counts().reset_index()
@@ -68,7 +69,7 @@ st.plotly_chart(most_present_genres(filtered_main))
 
 ###################  indicateur 2 ###################
 df = pd.merge(filtered_main, people_df, on="tconst", how="left")
-
+df = df.copy()
 # Supprimer tous les tconst de films d'animation
 animation_tconsts = df[df["genres"].str.contains("animation", case=False, na=False)][
     "tconst"
@@ -190,6 +191,8 @@ with col1:
 
 with col2:
     # Étape 1 : S'assurer que 'runtimeMinutes' est bien numérique
+    filtered_main = filtered_main.copy()
+
     filtered_main["duree"] = pd.to_numeric(
         filtered_main["runtimeMinutes"], errors="coerce"
     )
