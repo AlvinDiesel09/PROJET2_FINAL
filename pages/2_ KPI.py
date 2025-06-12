@@ -159,6 +159,8 @@ st.plotly_chart(fig)
 col1, col2 = st.columns(2)
 with col1:
     # Étape 1 : S'assurer que 'runtimeMinutes' est bien numérique
+    filtered_main = filtered_main.copy()
+
     filtered_main["duree"] = pd.to_numeric(
         filtered_main["runtimeMinutes"], errors="coerce"
     )
