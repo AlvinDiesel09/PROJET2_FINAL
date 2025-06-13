@@ -6,9 +6,6 @@ from difflib import get_close_matches
 import difflib
 from pathlib import Path
 
-import logging
-logging.basicConfig(filename='app.log', level=logging.INFO)
-logging.info('Ceci est un message de log.')
 
 # Titre principal
 st.markdown(
@@ -144,7 +141,7 @@ with st.sidebar :
 
     # Fonction pour initialiser le chat
     def init_chat():
-        model = genai.GenerativeModel("gemini-1.5-flash")
+        model = genai.GenerativeModel("gemini-2.0-flash")
         chat = model.start_chat(history=[
             {"role": "user", "parts": [system_prompt]},
             {"role": "model", "parts": ["Compris, je suis prêt à te proposer des recommandations."]}
