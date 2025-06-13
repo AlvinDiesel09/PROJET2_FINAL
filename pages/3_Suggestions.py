@@ -69,8 +69,8 @@ if "favoris" not in st.session_state:
 
 # Filtres
 st.header("💡 Suggestion de film")
-film_input = st.text_input("Quel film avez-vous aimé ?", placeholder="Ex: Inception")
-min_year = st.slider("Année minimale", 1960, 2025, 1992)
+film_input = st.text_input("Quel film avez-vous aimé ?", placeholder="Ex: Matrix")
+min_year = st.slider("Année minimale", 1960, 2025, 1990)
 min_rating = st.slider("Note minimale", 0.0, 10.0, 5.0, 0.5)
 
 # Suggestions de films
