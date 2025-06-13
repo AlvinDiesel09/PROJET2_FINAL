@@ -12,10 +12,10 @@ st.markdown(
     "<h1 style='text-align: center;font-size: 60px'>👀<em> On mate quoi ?</h1></em>",
     unsafe_allow_html=True,
 )
-
+dir = Path.cwd()
 # Chargement des données
-main_df = pd.read_parquet("data/main_df.parquet")
-people_df = pd.read_parquet("data/people_df.parquet")
+main_df = pd.read_parquet(dir/"data"/"main_df.parquet")
+people_df = pd.read_parquet(dir/"data"/"people_df.parquet")
 
 # Préparation des images
 BASE_POSTER_URL = "https://image.tmdb.org/t/p/w300"
@@ -126,62 +126,3 @@ with st.sidebar:
     st.markdown("<hr style='border:1px solid gray'>", unsafe_allow_html=True)
 
 ######################################################
-
-import google.generativeai as genai
-
-with st.sidebar : 
-    # Config de l'API
-    genai.configure(api_key="AIzaSyAG8NgAuuACAmFoiG8xEVKzNbrDKrcx7Bc")
-
-    # Prompt système
-    system_prompt = """
-    Tu es un spécialiste de recommandation de films. Tu donnes des réponses précises pour un public qui te donnera le titre d'un film et tu lui renverras environ 3 films proches.
-    Si la question ne concerne pas des films, indique que tu ne peux répondre qu'à ce sujet.
-    """
-
-    # Fonction pour initialiser le chat
-    def init_chat():
-        model = genai.GenerativeModel("gemini-2.0-flash")
-        chat = model.start_chat(history=[
-            {"role": "user", "parts": [system_prompt]},
-            {"role": "model", "parts": ["Compris, je suis prêt à te proposer des recommandations."]}
-        ])
-        return chat
-
-    # Initialisation du chat
-    if "chat" not in st.session_state:
-        st.session_state.chat = init_chat()
-        st.session_state.messages = [
-            {"role": "assistant", "text": "Aucune reco disponible ? 🔎 "}
-        ]
-
-    # Affichage de la discussion
-    for msg in st.session_state.messages:
-        with st.chat_message(msg["role"]):
-            st.markdown(msg["text"])
-
-    # Champ de saisie
-    user_input = st.chat_input("Tape le nom d'un film ici...")
-
-    # Traitement du message
-    if user_input:
-        # Afficher le message de l'utilisateur
-        st.session_state.messages.append({"role": "user", "text": user_input})
-        with st.chat_message("user"):
-            st.markdown(user_input)
-
-        # Obtenir la réponse de Gemini
-        response = st.session_state.chat.send_message(user_input)
-
-        # Afficher la réponse du bot
-        st.session_state.messages.append({"role": "assistant", "text": response.text})
-        with st.chat_message("assistant"):
-            st.markdown(response.text)
-
-    # Bouton de réinitialisation en dessous de la zone de texte du chatbot
-    if st.button("Réinitialiser CinéBot 🤖", key="reset_button"):
-        st.session_state.chat = init_chat()
-        st.session_state.messages = [
-            {"role": "assistant", "text": "Aucune reco disponible ? 🔎"}
-        ]
-        st.rerun()
